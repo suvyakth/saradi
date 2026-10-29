@@ -1,0 +1,217 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#04070a">
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <title>Saradi · When to leave for the doctor</title>
+  <meta name="description" content="Saradi calls elders in Kannada, Hindi or English at the right moment to leave for the doctor, and keeps the family updated.">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='9' fill='%237dffa8'/%3E%3Ccircle cx='16' cy='16' r='8' fill='none' stroke='%2303150b' stroke-width='2.4'/%3E%3Cpath d='M16 11v5l3.2 2' fill='none' stroke='%2303150b' stroke-width='2.4' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&display=swap">
+  <link rel="stylesheet" href="/style.css">
+</head>
+<body data-tab="plan">
+  <div class="aurora" aria-hidden="true"><i></i><i></i><i></i></div>
+  <div class="grid-bg" aria-hidden="true"></div>
+
+  <header>
+    <div class="header-inner">
+      <div class="brand">
+        <div class="logo" aria-hidden="true">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 12V6.5"/><path d="M12 12l3.5 2"/></svg>
+        </div>
+        <div class="brand-text">
+          <span class="brand-name">Saradi<span class="kn" lang="kn">ಸರದಿ</span></span>
+          <span class="brand-tag">Know exactly when to leave for the doctor</span>
+        </div>
+      </div>
+
+      <div class="clock" aria-label="Simulated clock">
+        <span class="clock-dot" aria-hidden="true"></span>
+        <span id="now" class="now">--:--</span>
+        <span id="date" class="date"></span>
+        <span class="modes desk-only"></span>
+      </div>
+
+      <div class="controls desk-only">
+        <span class="seg" role="group" aria-label="Move time forward">
+          <button data-advance="5" data-tip="Jump the demo clock forward 5 minutes">+5 min</button>
+          <button data-advance="15" data-tip="Jump the demo clock forward 15 minutes">+15 min</button>
+          <button data-advance="30" data-tip="Jump the demo clock forward 30 minutes">+30 min</button>
+        </span>
+        <span class="select-wrap" data-tip="How fast the demo clock runs. Faster speeds let waits pass quickly."><select class="speed-select" aria-label="Clock speed">
+          <option value="1">Real time</option>
+          <option value="30">30× speed</option>
+          <option value="60">60× speed</option>
+        </select></span>
+        <button class="primary" data-action="demo" data-tip="Reset everything and load a sample visit that starts at 10:00">Load cold-start demo</button>
+      </div>
+
+      <div class="icon-btns">
+        <button class="icon-btn compact-only" data-open="tools-sheet" aria-label="Demo tools" data-tip="Demo tools: move the clock and load the sample visit">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 7h10M18 7h2M4 17h2M10 17h10"/><circle cx="16" cy="7" r="2.2"/><circle cx="8" cy="17" r="2.2"/></svg>
+        </button>
+        <button class="icon-btn" data-open="notify-sheet" aria-label="Family notifications" data-tip="Family notifications: choose which updates the family gets">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 9a6 6 0 0 1 12 0c0 6 2.5 7.5 2.5 7.5h-17S6 15 6 9Z"/><path d="M10 20a2 2 0 0 0 4 0"/></svg>
+        </button>
+        <button class="icon-btn" id="help-toggle" data-help-toggle aria-pressed="false" aria-label="Show hints" data-nohelp data-tip="Hints: when on, tap any button to see what it does instead of pressing it">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M9.6 9.4a2.5 2.5 0 1 1 3.4 2.3c-.7.3-1 .8-1 1.5"/><path d="M12 16.8h.01"/></svg>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <div id="help-banner" class="help-banner" hidden>
+    <span><b>Hints are on.</b> Tap any button to see what it does. Nothing will be pressed.</span>
+    <button data-help-off data-nohelp>Turn off</button>
+  </div>
+
+  <section class="hero" aria-label="About Saradi">
+    <div>
+      <p class="eyebrow"><span class="pulse"></span>Voice agent for elders in Bengaluru</p>
+      <h1>Your turn, <span class="grad">right on time.</span></h1>
+      <p class="lede">Saradi <b>phones your parents</b> the moment it's time to leave for the doctor, in Kannada, Hindi or English, and keeps the family updated. Works at any hospital.</p>
+    </div>
+  </section>
+
+  <main>
+    <section class="pane visits-col" data-pane="plan" aria-labelledby="h-visits">
+      <div class="col-head">
+        <span class="step" aria-hidden="true">1</span>
+        <div class="col-title">
+          <h2 id="h-visits">Visits</h2>
+          <p class="col-sub">Saradi plans when each elder should leave.</p>
+        </div>
+        <button id="toggle-form" data-tip="Add a doctor visit for an elder">New visit</button>
+      </div>
+      <form id="visit-form" hidden>
+        <div class="grid">
+          <label>Elder's name<input name="elder_name" placeholder="Ajji" autocomplete="off" required></label>
+          <label>Elder's phone<input name="elder_phone" type="tel" inputmode="tel" placeholder="+919800000001" autocomplete="off" required></label>
+          <label>Language
+            <select name="language"><option>kannada</option><option>hindi</option><option>english</option></select>
+          </label>
+          <label>Family member<input name="family_name" placeholder="Suvyakth" autocomplete="off" required></label>
+          <label>Family WhatsApp<input name="family_phone" type="tel" inputmode="tel" placeholder="+358400000001" autocomplete="off" required></label>
+          <label>Doctor<input name="doctor_name" placeholder="Dr. Rao" autocomplete="off" required></label>
+          <label>Hospital<input name="hospital" placeholder="Manipal Old Airport Road" autocomplete="off" required></label>
+          <label>Department<input name="department" placeholder="Cardiology" autocomplete="off"></label>
+          <label>Appointment (HH:MM)<input name="appointment_time" inputmode="numeric" placeholder="13:00" autocomplete="off" required></label>
+          <label>Their token (if known)<input name="patient_token" type="number" inputmode="numeric" min="1" placeholder="21"></label>
+          <label>Travel time (min)<input name="travel_min" type="number" inputmode="numeric" min="0" value="40"></label>
+          <label>Last time, how late were they seen? (min)<input name="past_wait_min" type="number" inputmode="numeric" min="0" placeholder="Optional, e.g. 120"></label>
+          <label class="wide">Hospital's live token link (if they send one)<input name="clinic_link" type="url" inputmode="url" placeholder="Optional" autocomplete="off"></label>
+        </div>
+        <p id="form-error" class="error" hidden></p>
+        <div class="form-actions">
+          <button type="submit" class="primary" data-tip="Save this visit and start planning">Add visit</button>
+          <button type="button" id="cancel-form" data-tip="Close this form without saving">Cancel</button>
+        </div>
+      </form>
+      <div id="visits"></div>
+    </section>
+
+    <section class="pane calls-col" data-pane="phone" aria-labelledby="h-calls">
+      <div class="col-head">
+        <span class="step" aria-hidden="true">2</span>
+        <div class="col-title">
+          <h2 id="h-calls">Elder's phone</h2>
+          <p class="col-sub">Calls Saradi places. In simulation, answer as the elder would.</p>
+        </div>
+      </div>
+      <div id="calls"></div>
+    </section>
+
+    <section class="pane family-col" data-pane="family" aria-labelledby="h-family">
+      <div class="col-head">
+        <span class="step" aria-hidden="true">3</span>
+        <div class="col-title">
+          <h2 id="h-family">Family WhatsApp</h2>
+          <p class="col-sub">What the family member receives.</p>
+        </div>
+        <button data-open="notify-sheet" data-tip="Choose which updates the family gets, and quiet hours">Notifications</button>
+      </div>
+      <div id="messages" class="chat"></div>
+    </section>
+  </main>
+
+  <footer>
+    <span>Ranges, never promises: the elder risks a short wait, never a missed turn.</span>
+    <span>Voice by <b>Bolna</b> · Bolna Buildathon 2026</span>
+  </footer>
+
+  <nav class="tabbar" aria-label="Sections">
+    <button class="tab" data-tab="plan" aria-selected="true" data-tip="Plan: each visit, its leave time and progress">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><rect x="4" y="5" width="16" height="15" rx="3"/><path d="M8 3v4M16 3v4M4 10h16"/></svg>
+      <span>Plan</span>
+    </button>
+    <button class="tab" data-tab="phone" aria-selected="false" data-tip="Phone: the calls Saradi makes to the elder">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M21 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 1.1 4.2 2 2 0 0 1 3.1 2h3a2 2 0 0 1 2 1.7c.1 1 .4 1.9.7 2.8a2 2 0 0 1-.5 2.1L7.1 9.9a16 16 0 0 0 6 6l1.3-1.3a2 2 0 0 1 2.1-.4c.9.3 1.8.6 2.8.7a2 2 0 0 1 1.7 2Z"/></svg>
+      <span>Phone</span><i class="tab-dot" id="dot-phone" hidden></i>
+    </button>
+    <button class="tab" data-tab="family" aria-selected="false" data-tip="Family: the messages the family receives">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20 12a8 8 0 0 1-11.7 7.1L4 20l1-3.9A8 8 0 1 1 20 12Z"/></svg>
+      <span>Family</span><i class="tab-count" id="count-family" hidden>0</i>
+    </button>
+  </nav>
+
+  <dialog id="tools-sheet" class="sheet" aria-labelledby="ts-title">
+    <div class="sheet-head">
+      <h2 id="ts-title">Demo tools</h2>
+      <div class="sheet-actions"><button class="icon-btn" data-help-toggle aria-pressed="false" aria-label="Show hints" data-nohelp data-tip="Hints: when on, tap any item to see what it does instead of changing it"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M9.6 9.4a2.5 2.5 0 1 1 3.4 2.3c-.7.3-1 .8-1 1.5"/><path d="M12 16.8h.01"/></svg></button><button class="icon-btn" data-close aria-label="Close" data-nohelp><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 6l12 12M18 6 6 18"/></svg></button></div>
+    </div>
+    <p class="help-inline"><b>Hints are on.</b> Tap any item to see what it does. Nothing will change.</p>
+    <p class="sheet-sub">Move the demo clock so waits and calls happen quickly.</p>
+    <p class="sheet-clock">Demo time <b class="num js-now">--:--</b></p>
+    <div class="seg seg-big" role="group" aria-label="Move time forward">
+      <button data-advance="5" data-tip="Jump the demo clock forward 5 minutes">+5 min</button>
+      <button data-advance="15" data-tip="Jump the demo clock forward 15 minutes">+15 min</button>
+      <button data-advance="30" data-tip="Jump the demo clock forward 30 minutes">+30 min</button>
+    </div>
+    <label class="field">Clock speed
+      <span class="select-wrap" data-tip="How fast the demo clock runs. Faster speeds let waits pass quickly."><select class="speed-select">
+        <option value="1">Real time</option>
+        <option value="30">30× speed</option>
+        <option value="60">60× speed</option>
+      </select></span>
+    </label>
+    <button class="primary block" data-action="demo" data-tip="Reset everything and load a sample visit that starts at 10:00">Load cold-start demo</button>
+    <div class="modes modes-sheet"></div>
+  </dialog>
+
+  <dialog id="notify-sheet" class="sheet" aria-labelledby="ns-title">
+    <div class="sheet-head">
+      <h2 id="ns-title">Family notifications</h2>
+      <div class="sheet-actions"><button class="icon-btn" data-help-toggle aria-pressed="false" aria-label="Show hints" data-nohelp data-tip="Hints: when on, tap any item to see what it does instead of changing it"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M9.6 9.4a2.5 2.5 0 1 1 3.4 2.3c-.7.3-1 .8-1 1.5"/><path d="M12 16.8h.01"/></svg></button><button class="icon-btn" data-close aria-label="Close" data-nohelp><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 6l12 12M18 6 6 18"/></svg></button></div>
+    </div>
+    <p class="help-inline"><b>Hints are on.</b> Tap any item to see what it does. Nothing will change.</p>
+    <p class="sheet-sub" id="ns-sub"></p>
+    <label class="field" id="ns-who-wrap" hidden>Who gets these
+      <span class="select-wrap" data-tip="Each family member has their own settings"><select id="ns-who"></select></span>
+    </label>
+    <div id="ns-body">
+      <div class="presets" role="group" aria-label="Quick choices">
+        <button data-preset="all" data-tip="Send every update">Everything</button>
+        <button data-preset="key" data-tip="Only when the elder leaves and when the visit is done, plus urgent alerts">Key updates</button>
+        <button data-preset="urgent" data-tip="Only urgent alerts, such as the elder feeling unwell">Urgent only</button>
+      </div>
+      <div class="switches" id="ns-switches"></div>
+      <div class="quiet-times" id="ns-times" hidden>
+        <label class="field">From<input type="time" data-pref="quiet_from" data-tip="Quiet hours start"></label>
+        <label class="field">To<input type="time" data-pref="quiet_to" data-tip="Quiet hours end"></label>
+      </div>
+      <p class="sheet-note" id="ns-quiet-note" hidden>Updates during quiet hours are skipped, not delayed. Urgent alerts always come through.</p>
+    </div>
+    <p class="saved" id="ns-saved" role="status" aria-live="polite"></p>
+    <button class="primary block" data-close data-nohelp>Done</button>
+  </dialog>
+
+  <div id="tip" role="tooltip" popover="manual"></div>
+  <script src="/app.js"></script>
+</body>
+</html>
